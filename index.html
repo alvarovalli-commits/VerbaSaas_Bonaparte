@@ -41,9 +41,9 @@
   .brandrow{display:flex;align-items:center;gap:10px;padding:4px 8px 14px;min-width:0}
   @media(max-width:860px){.brandrow{padding:0 8px 0 4px;flex:0 0 auto}}
   .brand-ic{width:28px;height:28px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:0 0 28px;font-weight:700;font-size:12px;color:#fff;letter-spacing:-.01em}
-  .wordmark{font-weight:700;font-size:17px;letter-spacing:-.03em;color:var(--sb-ink-hi);white-space:nowrap;overflow:hidden;transition:opacity .15s,max-width .2s;max-width:140px}
+  .wordmark{font-weight:700;font-size:17px;letter-spacing:-.03em;color:var(--sb-ink-hi);white-space:nowrap;overflow:hidden;transition:opacity .15s;max-width:140px}
   .app.sb-col .wordmark{opacity:0;max-width:0}
-  .brandrow .tag{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sb-ink);white-space:nowrap;overflow:hidden;transition:opacity .15s,max-width .2s;max-width:60px}
+  .brandrow .tag{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sb-ink);white-space:nowrap;overflow:hidden;transition:opacity .15s;max-width:60px}
   .app.sb-col .brandrow .tag{opacity:0;max-width:0}
   @media(max-width:860px){.brandrow .tag{display:none}}
   .nav{display:flex;flex-direction:column;gap:2px;flex:1}
@@ -51,7 +51,7 @@
   .nav a{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--sb-ink);white-space:nowrap;transition:.13s;position:relative}
   .nav a .nav-ic{flex:0 0 18px;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
   .nav a .nav-ic svg{width:18px;height:18px}
-  .nav a .nav-lbl{overflow:hidden;transition:opacity .15s,max-width .2s;max-width:160px}
+  .nav a .nav-lbl{overflow:hidden;transition:opacity .15s;max-width:160px}
   .app.sb-col .nav a{padding:10px;justify-content:center;gap:0}
   .app.sb-col .nav a .nav-lbl{opacity:0;max-width:0}
   .app.sb-col .nav a[data-label]:hover::after{content:attr(data-label);position:absolute;left:calc(100% + 8px);top:50%;transform:translateY(-50%);background:var(--ink-deep);color:#fff;font-size:12px;font-weight:500;padding:5px 10px;border-radius:7px;white-space:nowrap;z-index:99;box-shadow:0 4px 16px rgba(0,0,0,.3);pointer-events:none}
@@ -62,7 +62,7 @@
   .side-foot{border-top:1px solid var(--sb-line);padding-top:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden}
   @media(max-width:860px){.side-foot{margin-left:auto;border-top:none;padding-top:0;flex-direction:row;align-items:center;flex:0 0 auto}}
   @media(max-width:860px){.av-who{display:none}}
-  .logout{font-size:12px;color:var(--sb-ink);background:none;border:1px solid var(--sb-line);border-radius:8px;padding:7px 11px;cursor:pointer;transition:.13s;white-space:nowrap}
+  .logout{font-size:12px;color:var(--sb-ink);background:none;border:1px solid var(--sb-line);border-radius:8px;padding:7px 11px;cursor:pointer;transition:border-color .13s,color .13s;white-space:nowrap}
   .logout:hover{border-color:var(--sb-ink-hi);color:var(--sb-ink-hi)}
   .sb-toggle{background:none;border:1px solid var(--sb-line);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--sb-ink);transition:.14s;align-self:flex-start}
   .sb-toggle:hover{background:var(--sb-hover);color:var(--sb-ink-hi);border-color:transparent}
@@ -136,7 +136,7 @@
   .av-row .av-inf .s2{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   /* sidebar user footer */
   .av-who{display:flex;align-items:center;gap:9px;padding:3px 6px;overflow:hidden;min-height:36px}
-  .av-who .av-text{overflow:hidden;transition:opacity .15s,max-width .2s;max-width:160px;min-width:0}
+  .av-who .av-text{overflow:hidden;transition:opacity .15s;max-width:160px;min-width:0}
   .av-who .av-text .nm{font-weight:600;font-size:13px;color:var(--sb-ink-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .av-who .av-text .em{font-size:11px;color:var(--sb-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
   .app.sb-col .av-who{padding:3px 0;justify-content:center}
@@ -192,7 +192,7 @@
 
   .iconbtn{border:1px solid var(--line);background:var(--field);color:var(--muted);border-radius:8px;height:34px;min-width:34px;padding:0 9px;cursor:pointer;font-size:13px;transition:.13s;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
   .iconbtn:hover{border-color:var(--ink);color:var(--ink)}
-  .iconbtn.danger:hover{border-color:#a11;color:#a11}
+  .iconbtn.danger:hover{border-color:var(--err);color:var(--err)}
 
   /* ---------- editor (calculator) ---------- */
   .grid{display:grid;grid-template-columns:1fr 372px;gap:22px;align-items:start}
@@ -273,9 +273,9 @@
   .mini:hover{border-color:var(--ink)}
   .mini.solid{background:var(--accent-h);color:#fff;border-color:var(--accent-h)}
   .mini.solid:hover{background:oklch(41% 0.18 265)}
-  .mini.danger:hover{border-color:#a11;color:#a11}
+  .mini.danger:hover{border-color:var(--err);color:var(--err)}
   .asst-status{font-size:12px;color:var(--muted);margin-top:12px;min-height:16px;line-height:1.5}
-  .asst-status.err{color:#a11}
+  .asst-status.err{color:var(--err)}
   .keyline{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.5}
   /* assistant chat drawer */
   .overlay.right{justify-content:flex-end;align-items:stretch;padding:0}
@@ -332,7 +332,7 @@
   .auth-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 40px 90px -40px rgba(0,0,0,.4);width:100%;max-width:372px;padding:30px 28px}
   .auth-brand{font-weight:700;font-size:26px;letter-spacing:-.03em}
   .auth-tag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:4px 0 22px}
-  .auth-err{font-size:12.5px;color:#a11;margin-top:10px;min-height:16px}
+  .auth-err{font-size:12.5px;color:var(--err);margin-top:10px;min-height:16px}
   .auth-alt{font-size:13px;color:var(--muted);text-align:center;margin-top:16px}
   .auth-alt button{background:none;border:none;color:var(--ink);font-weight:600;cursor:pointer;font-size:13px;text-decoration:underline;padding:0}
   .demo-note{font-size:11.5px;color:var(--muted);background:var(--surface-2);border:1px solid var(--line-2);border-radius:9px;padding:10px 12px;margin-top:16px;line-height:1.5}
@@ -349,20 +349,20 @@
 
   /* ---------- freelancers / POs / financeiro ---------- */
   .compliance{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;letter-spacing:.04em;padding:4px 8px;border-radius:8px;border:1px solid var(--line)}
-  .compliance.ok{border-color:#2a7a3b;color:#2a7a3b;background:#f0faf2}
-  .compliance.warn{border-color:#b07b00;color:#8a5e00;background:#fdf8ec}
+  .compliance.ok{border-color:var(--ok);color:var(--ok);background:var(--ok-bg)}
+  .compliance.warn{border-color:var(--warn);color:var(--warn);background:var(--warn-bg)}
   .po-status{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
   .po-status.rascunho{color:var(--muted)}
   .po-status.enviada{border-color:var(--ink);color:var(--ink)}
-  .po-status.aceita{border-color:#2a7a3b;color:#2a7a3b;background:#f0faf2}
-  .po-status.pronta{border-color:#b07b00;color:#8a5e00;background:#fdf8ec}
+  .po-status.aceita{border-color:var(--ok);color:var(--ok);background:var(--ok-bg)}
+  .po-status.pronta{border-color:var(--warn);color:var(--warn);background:var(--warn-bg)}
   .po-status.paga{background:var(--ink);color:#fff;border-color:var(--ink)}
   .fore-tag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);margin-left:6px}
   .fore-tag.applied{background:var(--ink);color:#fff;border-color:var(--ink)}
   .pl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
   .pl-stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
   .pl-stat .v{font-weight:700;font-size:26px;letter-spacing:-.02em;font-family:var(--mono);font-variant-numeric:tabular-nums}
-  .pl-stat .v.pos{color:#1a7a30}.pl-stat .v.neg{color:#a11}
+  .pl-stat .v.pos{color:var(--ok)}.pl-stat .v.neg{color:var(--err)}
   .pl-stat .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 
   @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}.btn:hover{transform:none}}
@@ -831,6 +831,7 @@ function saveClient(){
 /* ---------- PERFIS ---------- */
 function viewPerfis(){
   return `
+  <div class="breadcrumb"><a href="#/">Início</a><span class="sep">›</span>Perfis de vaga</div>
   <div class="page-h"><div><h1>Perfis de vaga</h1><div class="sub">funções reutilizáveis na montagem da equipe</div></div>
     <div class="row-actions"><button class="btn" id="newProf">+ Novo perfil</button></div></div>
   <div class="card">
@@ -885,6 +886,7 @@ function saveProf(){
 /* ---------- CONTA ---------- */
 function viewConta(){
   return `
+  <div class="breadcrumb"><a href="#/">Início</a><span class="sep">›</span>Conta</div>
   <div class="page-h"><div><h1>Conta</h1><div class="sub">perfil, assistente e dados</div></div></div>
   <div class="card pad" style="max-width:560px">
     <h2 style="font-size:14px;margin:0 0 14px">Perfil</h2>
@@ -1317,6 +1319,7 @@ function viewFreelancers(){
   if(!db.freelancers)db.freelancers=[];
   const fl=db.freelancers;
   return`
+  <div class="breadcrumb"><a href="#/">Início</a><span class="sep">›</span>Freelancers</div>
   <div class="page-h"><div><h1>Freelancers</h1><div class="sub">${fl.length} cadastrados</div></div>
     <div class="row-actions"><button class="btn" id="newFl">+ Novo freelancer</button></div></div>
   <div class="card">
@@ -1385,6 +1388,7 @@ function viewPos(){
   const totalAberto=pos.filter(p=>p.status!=="paga").reduce((s,p)=>s+num(p.valor),0);
   const totalPago=pos.filter(p=>p.status==="paga").reduce((s,p)=>s+num(p.valor),0);
   return`
+  <div class="breadcrumb"><a href="#/">Início</a><span class="sep">›</span>Pagamentos</div>
   <div class="page-h"><div><h1>Pagamentos</h1><div class="sub">Ordens de pagamento a freelancers</div></div>
     <div class="row-actions"><button class="btn" id="newPo">+ Nova ordem</button></div></div>
   <div class="stats">
@@ -1495,6 +1499,7 @@ function viewFinanceiro(){
   ].map(r=>({...r,net:r.recv-r.pay}));
   const recentExp=[...db.expenses].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,20);
   return`
+  <div class="breadcrumb"><a href="#/">Início</a><span class="sep">›</span>Financeiro</div>
   <div class="page-h"><div><h1>Financeiro</h1><div class="sub">P&L, fluxo de caixa e despesas</div></div>
     <div class="row-actions"><button class="btn" id="newExp">+ Lançar despesa</button></div></div>
   <div class="pl-grid">
@@ -1507,9 +1512,9 @@ function viewFinanceiro(){
     <div class="card-h"><h2>Fluxo de caixa projetado</h2><span class="sub">entradas vs. saídas a vencer</span></div>
     <table class="tbl"><thead><tr><th>Período</th><th class="r">Entrada esperada</th><th class="r">Saída esperada</th><th class="r">Saldo</th></tr></thead><tbody>
       ${cfRows.map(r=>`<tr><td class="nm">${r.period}</td>
-        <td class="r num" style="color:#1a7a30">${brl(r.recv)}</td>
-        <td class="r num" style="color:#a11">${brl(r.pay)}</td>
-        <td class="r num"><b style="color:${r.net>=0?"#1a7a30":"#a11"}">${brl(r.net)}</b></td></tr>`).join("")}
+        <td class="r num" style="color:var(--ok)">${brl(r.recv)}</td>
+        <td class="r num" style="color:var(--err)">${brl(r.pay)}</td>
+        <td class="r num"><b style="color:${r.net>=0?"var(--ok)":"var(--err)"}">${brl(r.net)}</b></td></tr>`).join("")}
     </tbody></table>
     <p class="hint" style="padding:8px 14px">Entradas: propostas aprovadas com <b>data de recebimento</b> definida no editor. Saídas: POs aceitas/prontas com vencimento definido.</p>
   </div>
