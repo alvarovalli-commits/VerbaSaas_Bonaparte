@@ -6,15 +6,18 @@
 <title>Verba · Preços & propostas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Mono:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F4F4F2;--surface:#FFFFFF;--surface-2:#F7F7F5;
-    --ink:#111111;--ink-2:#404040;--muted:#6A6A68;
-    --line:#E4E4E1;--line-2:#ECECEA;--field:#FFFFFF;
-    --ink-deep:#0D0D0C;--on-dark:#F2F2EF;--on-dark-dim:#9C9C98;
-    --shadow:0 1px 0 rgba(17,17,17,.02), 0 18px 44px -30px rgba(17,17,17,.35);
-    --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--r:12px;
+    --bg:#f0f2f9;--surface:#ffffff;--surface-2:#f6f7fd;
+    --ink:#17193a;--ink-2:#4a506b;--muted:#8890b5;
+    --line:#e2e5f1;--line-2:#edf0f8;--field:#ffffff;
+    --ink-deep:#0d0f24;--on-dark:#e2e5f0;--on-dark-dim:#5c6190;
+    --shadow:0 1px 0 rgba(23,25,58,.03),0 20px 44px -28px rgba(23,25,58,.18);
+    --sans:"Google Sans","Helvetica Neue",Arial,sans-serif;--mono:"Google Sans Mono","JetBrains Mono",ui-monospace,monospace;--r:12px;
+    --accent:#6366f1;--accent-h:#4f52d4;
+    --sb-bg:#1e2139;--sb-hover:#282b4a;--sb-active:#2d3058;
+    --sb-ink:#737aad;--sb-ink-hi:#e2e5f0;--sb-line:#262944;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -26,29 +29,43 @@
   button:disabled{opacity:.5;cursor:not-allowed}
 
   /* ---------- shell ---------- */
-  .app{display:grid;grid-template-columns:228px 1fr;min-height:100vh}
-  @media(max-width:860px){.app{grid-template-columns:1fr}}
-  .sidebar{background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:18px 14px;gap:6px;position:sticky;top:0;height:100vh}
-  @media(max-width:860px){.sidebar{position:static;height:auto;flex-direction:row;align-items:center;border-right:none;border-bottom:1px solid var(--line);overflow-x:auto;gap:4px}}
-  .brandrow{display:flex;align-items:baseline;gap:9px;padding:6px 8px 14px}
+  .app{display:grid;grid-template-columns:220px 1fr;min-height:100vh;transition:grid-template-columns .2s}
+  .app.sb-col{grid-template-columns:66px 1fr}
+  @media(max-width:860px){.app,.app.sb-col{grid-template-columns:1fr}}
+  .sidebar{background:var(--sb-bg);display:flex;flex-direction:column;padding:14px 10px 16px;gap:3px;position:sticky;top:0;height:100vh;overflow:hidden;z-index:40}
+  @media(max-width:860px){.sidebar{position:static;height:auto;flex-direction:row;align-items:center;border-bottom:1px solid var(--sb-line);overflow-x:auto;gap:3px;padding:10px 12px}}
+  .brandrow{display:flex;align-items:center;gap:10px;padding:4px 8px 14px;min-width:0}
   @media(max-width:860px){.brandrow{padding:0 8px 0 4px;flex:0 0 auto}}
-  .wordmark{font-weight:700;font-size:19px;letter-spacing:-.03em}
-  .brandrow .tag{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .brand-ic{width:28px;height:28px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:0 0 28px;font-weight:700;font-size:12px;color:#fff;letter-spacing:-.01em}
+  .wordmark{font-weight:700;font-size:17px;letter-spacing:-.03em;color:var(--sb-ink-hi);white-space:nowrap;overflow:hidden;transition:opacity .15s,max-width .2s;max-width:140px}
+  .app.sb-col .wordmark{opacity:0;max-width:0}
+  .brandrow .tag{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sb-ink);white-space:nowrap;overflow:hidden;transition:opacity .15s,max-width .2s;max-width:60px}
+  .app.sb-col .brandrow .tag{opacity:0;max-width:0}
   @media(max-width:860px){.brandrow .tag{display:none}}
-  .nav{display:flex;flex-direction:column;gap:2px}
-  @media(max-width:860px){.nav{flex-direction:row;gap:2px}}
-  .nav a{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--ink-2);white-space:nowrap;transition:.13s}
-  .nav a:hover{background:var(--surface-2);color:var(--ink)}
-  .nav a.active{background:var(--ink);color:#fff}
-  .nav a .ic{font-family:var(--mono);font-size:12px;opacity:.7;width:14px;text-align:center}
-  .nav a.active .ic{opacity:1}
-  .side-foot{margin-top:auto;border-top:1px solid var(--line-2);padding-top:12px;display:flex;flex-direction:column;gap:8px}
-  @media(max-width:860px){.side-foot{margin-top:0;margin-left:auto;border-top:none;padding-top:0;flex-direction:row;align-items:center;flex:0 0 auto}}
-  .who{font-size:12px;color:var(--muted);padding:0 8px;line-height:1.3}
-  .who b{display:block;color:var(--ink);font-weight:600;font-size:13px}
+  .nav{display:flex;flex-direction:column;gap:2px;flex:1}
+  @media(max-width:860px){.nav{flex-direction:row;gap:2px;flex:0}}
+  .nav a{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--sb-ink);white-space:nowrap;transition:.13s;position:relative}
+  .nav a .nav-ic{flex:0 0 18px;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
+  .nav a .nav-ic svg{width:18px;height:18px}
+  .nav a .nav-lbl{overflow:hidden;transition:opacity .15s,max-width .2s;max-width:160px}
+  .app.sb-col .nav a{padding:10px;justify-content:center;gap:0}
+  .app.sb-col .nav a .nav-lbl{opacity:0;max-width:0}
+  .app.sb-col .nav a[data-label]:hover::after{content:attr(data-label);position:absolute;left:calc(100% + 8px);top:50%;transform:translateY(-50%);background:var(--ink-deep);color:#fff;font-size:12px;font-weight:500;padding:5px 10px;border-radius:7px;white-space:nowrap;z-index:99;box-shadow:0 4px 16px rgba(0,0,0,.3);pointer-events:none}
+  .nav a:hover{background:var(--sb-hover);color:var(--sb-ink-hi)}
+  .nav a.active{background:var(--sb-active);color:#fff}
+  .nav a.active .nav-ic{color:var(--accent)}
+  @media(max-width:860px){.app.sb-col .nav a{padding:8px 10px;justify-content:flex-start;gap:9px}.app.sb-col .nav a .nav-lbl{opacity:1;max-width:160px}}
+  .side-foot{border-top:1px solid var(--sb-line);padding-top:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden}
+  @media(max-width:860px){.side-foot{margin-left:auto;border-top:none;padding-top:0;flex-direction:row;align-items:center;flex:0 0 auto}}
+  .who{font-size:12px;color:var(--sb-ink);padding:0 8px;line-height:1.3;white-space:nowrap;overflow:hidden;transition:opacity .15s,max-width .2s;max-width:200px}
+  .who b{display:block;color:var(--sb-ink-hi);font-weight:600;font-size:13px}
+  .app.sb-col .who{opacity:0;max-width:0;padding:0}
   @media(max-width:860px){.who{display:none}}
-  .logout{font-size:12px;color:var(--ink-2);background:none;border:1px solid var(--line);border-radius:8px;padding:7px 11px;cursor:pointer;transition:.13s}
-  .logout:hover{border-color:var(--ink);color:var(--ink)}
+  .logout{font-size:12px;color:var(--sb-ink);background:none;border:1px solid var(--sb-line);border-radius:8px;padding:7px 11px;cursor:pointer;transition:.13s;white-space:nowrap}
+  .logout:hover{border-color:var(--sb-ink-hi);color:var(--sb-ink-hi)}
+  .sb-toggle{background:none;border:1px solid var(--sb-line);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--sb-ink);transition:.14s;align-self:flex-start}
+  .sb-toggle:hover{background:var(--sb-hover);color:var(--sb-ink-hi);border-color:transparent}
+  @media(max-width:860px){.sb-toggle{display:none}}
   .main{min-width:0;padding:26px 30px 90px}
   @media(max-width:860px){.main{padding:22px 18px 80px}}
 
@@ -290,6 +307,34 @@
   .auth-alt button{background:none;border:none;color:var(--ink);font-weight:600;cursor:pointer;font-size:13px;text-decoration:underline;padding:0}
   .demo-note{font-size:11.5px;color:var(--muted);background:var(--surface-2);border:1px solid var(--line-2);border-radius:9px;padding:10px 12px;margin-top:16px;line-height:1.5}
 
+  /* ---------- budget builder ---------- */
+  .bb-rows{display:flex;flex-direction:column;gap:8px}
+  .bb-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr .6fr .7fr 36px;gap:7px;align-items:end;padding:10px;border:1px solid var(--line-2);border-radius:9px;background:var(--surface-2)}
+  .bb-row.head{background:none;border:none;padding:0 10px}
+  .bb-row.head span{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  @media(max-width:760px){.bb-row{grid-template-columns:1fr 1fr}.bb-row.head{display:none}}
+  .bb-total{display:flex;gap:10px;padding:10px 10px 0;border-top:1px solid var(--line-2);margin-top:8px;font-family:var(--mono);font-size:13px;justify-content:flex-end;align-items:center}
+  .bb-total .k{color:var(--muted)}.bb-total .v{font-weight:700}
+  .bb-lock-bar{display:flex;align-items:center;gap:8px;padding:10px 10px 0;font-size:12.5px;color:var(--muted)}
+
+  /* ---------- freelancers / POs / financeiro ---------- */
+  .compliance{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;letter-spacing:.04em;padding:4px 8px;border-radius:8px;border:1px solid var(--line)}
+  .compliance.ok{border-color:#2a7a3b;color:#2a7a3b;background:#f0faf2}
+  .compliance.warn{border-color:#b07b00;color:#8a5e00;background:#fdf8ec}
+  .po-status{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+  .po-status.rascunho{color:var(--muted)}
+  .po-status.enviada{border-color:var(--ink);color:var(--ink)}
+  .po-status.aceita{border-color:#2a7a3b;color:#2a7a3b;background:#f0faf2}
+  .po-status.pronta{border-color:#b07b00;color:#8a5e00;background:#fdf8ec}
+  .po-status.paga{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .fore-tag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);margin-left:6px}
+  .fore-tag.applied{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .pl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
+  .pl-stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+  .pl-stat .v{font-weight:700;font-size:26px;letter-spacing:-.02em;font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .pl-stat .v.pos{color:#1a7a30}.pl-stat .v.neg{color:#a11}
+  .pl-stat .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+
   @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}.btn:hover{transform:none}}
   @media print{
     .sidebar,.main > .ed-head,.editor,.doc-tools{display:none!important}
@@ -325,6 +370,10 @@ const STATUS_SHADE={rascunho:"#9a9a98",enviada:"#555553",aprovada:"#111111",perd
 let propFilters={q:"",status:"",client:""};
 const ICTRASH='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>';
 const ICEDIT='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';
+const PO_STATUS={rascunho:"Rascunho",enviada:"Enviada",aceita:"Aceita",pronta:"Pronta p/ pgto.",paga:"Paga"};
+const PO_FLOW={rascunho:"enviada",enviada:"aceita",aceita:"pronta",pronta:"paga"};
+const COA_DEFAULT=["Direção de Arte","Redação / Copy","Motion Design","Estratégia","Tráfego Pago / Mídia","Infraestrutura / SaaS","Fotografia","Impressão / Gráfica","Tradução / Locução","Outros serviços"];
+function defaultCoa(){return COA_DEFAULT.map(nome=>({id:uid(),nome}));}
 
 /* ---------- seed + persistence ---------- */
 function seedProposal(over){
@@ -335,6 +384,7 @@ function seedProposal(over){
     model:"projeto",risco:0,meses:6,token:40,
     escopo:"",condicoes:"50% na aprovação · 50% na entrega final",validade:"15 dias",
     detalhe:true,mostrarHoras:true,
+    budgetLines:[],budgetLocked:false,budgetLockedAt:null,budgetDeviations:[],dataRecebimento:null,
   },over||{});
 }
 let _clock=1;
@@ -358,15 +408,35 @@ function freshDb(){
     thirds:[{id:uid(),descricao:"Ilustração (freelancer)",custo:4500,overhead:15,margem:10}],
     descricao:"Reposicionamento e nova identidade visual para a Acme.",
   });
+  const flAna={id:uid(),nome:"Ana Lima",tipo:"PF",cpfCnpj:"123.456.789-00",email:"ana@email.com",pix:"ana@email.com",portfolio:"",obs:"Motion design · parceira frequente"};
+  const flStudio={id:uid(),nome:"Studio X",tipo:"PJ",cpfCnpj:"",email:"studio@x.com",pix:"",obs:"Fotografia"};
   return {
     loggedIn:false,
     account:{name:"Você",email:"demo@verba.app",pass:"demo"},
     clients:[{id:cliId,nome:"Marina Souza",empresa:"Acme Brasil",email:"marina@acme.com",telefone:"",obs:"Fintech B2B · contato via indicação."}],
     profiles:profs,
     proposals:[prop],
+    freelancers:[flAna,flStudio],
+    pos:[{id:uid(),titulo:"Ilustrações — Rebrand Acme",proposalId:prop.id,freelancerId:flAna.id,budgetLineId:null,valor:4500,descricao:"20 ilustrações vetoriais",emissao:nowSafe(),vencimento:nowSafe()+45*86400000,status:"aceita",foreApplied:false,foreDesconto:0,createdAt:nowSafe()}],
+    chartOfAccounts:defaultCoa(),
+    expenses:[],
   };
 }
-function loadDb(){ try{const s=localStorage.getItem("verba_db2");if(s){const d=JSON.parse(s);if(d&&d.proposals)return d;}}catch(e){} return freshDb(); }
+function migrateDb(d){
+  if(!d.freelancers)d.freelancers=[];
+  if(!d.pos)d.pos=[];
+  if(!d.chartOfAccounts||!d.chartOfAccounts.length)d.chartOfAccounts=defaultCoa();
+  if(!d.expenses)d.expenses=[];
+  d.proposals.forEach(p=>{
+    if(!p.budgetLines)p.budgetLines=[];
+    if(p.budgetLocked==null)p.budgetLocked=false;
+    if(!p.budgetLockedAt)p.budgetLockedAt=null;
+    if(!p.dataRecebimento)p.dataRecebimento=null;
+    if(!p.budgetDeviations)p.budgetDeviations=[];
+  });
+  return d;
+}
+function loadDb(){ try{const s=localStorage.getItem("verba_db2");if(s){const d=JSON.parse(s);if(d&&d.proposals)return migrateDb(d);}}catch(e){} return freshDb(); }
 let db=loadDb();
 function saveDb(){ try{localStorage.setItem("verba_db2",JSON.stringify(db));}catch(e){} }
 function getKey(){ try{return localStorage.getItem("verba_key")||"";}catch(e){return "";} }
@@ -432,6 +502,9 @@ function render(){
   else if(h==="#/clientes"){ body=viewClientes(); binder=bindClientes; }
   else if(h==="#/perfis"){ body=viewPerfis(); binder=bindPerfis; }
   else if(h==="#/conta"){ body=viewConta(); binder=bindConta; }
+  else if(h==="#/freelancers"){ body=viewFreelancers(); binder=bindFreelancers; }
+  else if(h==="#/pos"){ body=viewPos(); binder=bindPos; }
+  else if(h==="#/financeiro"){ body=viewFinanceiro(); binder=bindFinanceiro; }
   else { body=viewDashboard(); binder=bindDashboard; }
   appEl.innerHTML=shell(body,h);
   bindShell();
@@ -440,27 +513,67 @@ function render(){
 window.addEventListener("hashchange",render);
 
 /* ---------- shell ---------- */
-function navItem(href,ic,label,h){const a=h===href||(href==="#/propostas"&&h.indexOf("#/proposta/")===0);return `<a href="${href}" class="${a?"active":""}"><span class="ic">${ic}</span>${label}</a>`;}
+const NAV_ICONS={
+  dashboard:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5"/></svg>`,
+  propostas:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h7l4 4v12a1 1 0 01-1 1H5a1 1 0 01-1-1V3a1 1 0 011-1z"/><path d="M12 2v4h4"/><path d="M7 9h6M7 12h4"/></svg>`,
+  clientes:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.2"/><path d="M3 17c0-3.3 3.1-6 7-6s7 2.7 7 6"/></svg>`,
+  perfis:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16c0-2.8 2.5-5 5.5-5 1.1 0 2.1.3 3 .8"/><circle cx="7.5" cy="7" r="3"/><path d="M13 12l5 5M18 12l-5 5"/></svg>`,
+  financeiro:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15l4-5 4 3 5-7"/><circle cx="17" cy="6" r="1.5" fill="currentColor" stroke="none"/></svg>`,
+  freelancers:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="6.5" r="2.8"/><path d="M2 16c0-2.8 2.6-5 6-5s6 2.2 6 5"/><path d="M15 8.5l1.5 1.5L19 7"/></svg>`,
+  pagamentos:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M2 9h16"/><path d="M6 13h3"/></svg>`,
+  conta:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="2.5"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.2 4.2l1.4 1.4M14.4 14.4l1.4 1.4M4.2 15.8l1.4-1.4M14.4 5.6l1.4-1.4"/></svg>`,
+  collapse:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M13 5l-5 5 5 5"/></svg>`,
+  expand:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M7 5l5 5-5 5"/></svg>`,
+};
+function navItem(href,_ic,label,h){
+  const a=h===href||(href==="#/propostas"&&h.indexOf("#/proposta/")===0);
+  const icKey={
+    "#/":"dashboard","#/propostas":"propostas","#/clientes":"clientes",
+    "#/perfis":"perfis","#/financeiro":"financeiro","#/freelancers":"freelancers",
+    "#/pos":"pagamentos","#/conta":"conta"
+  }[href]||"dashboard";
+  return `<a href="${href}" class="${a?"active":""}" data-label="${esc(label)}"><span class="nav-ic">${NAV_ICONS[icKey]}</span><span class="nav-lbl">${label}</span></a>`;
+}
+function getSbCollapsed(){try{return localStorage.getItem("verba_sb_col")==="1";}catch{return false;}}
+function setSbCollapsed(v){try{localStorage.setItem("verba_sb_col",v?"1":"0");}catch{}}
 function shell(body,h){
-  return `<div class="app">
+  const col=getSbCollapsed();
+  return `<div class="app${col?" sb-col":""}">
     <aside class="sidebar">
-      <div class="brandrow"><span class="wordmark">Verba</span><span class="tag">SaaS</span></div>
+      <div class="brandrow">
+        <div class="brand-ic">V</div>
+        <span class="wordmark">Verba</span><span class="tag">SaaS</span>
+      </div>
       <nav class="nav">
-        ${navItem("#/","◇","Dashboard",h)}
-        ${navItem("#/propostas","▤","Propostas",h)}
-        ${navItem("#/clientes","◎","Clientes",h)}
-        ${navItem("#/perfis","☰","Perfis de vaga",h)}
-        ${navItem("#/conta","⚙","Conta",h)}
+        ${navItem("#/","","Dashboard",h)}
+        ${navItem("#/propostas","","Propostas",h)}
+        ${navItem("#/clientes","","Clientes",h)}
+        ${navItem("#/perfis","","Perfis de vaga",h)}
+        ${navItem("#/financeiro","","Financeiro",h)}
+        ${navItem("#/freelancers","","Freelancers",h)}
+        ${navItem("#/pos","","Pagamentos",h)}
+        ${navItem("#/conta","","Conta",h)}
       </nav>
       <div class="side-foot">
         <div class="who"><b>${esc(db.account.name||"Você")}</b>${esc(db.account.email||"")}</div>
+        <button class="sb-toggle" id="sbToggle" title="${col?"Expandir":"Recolher"} menu">${col?NAV_ICONS.expand:NAV_ICONS.collapse}</button>
         <button class="logout" id="logoutBtn">Sair</button>
       </div>
     </aside>
     <main class="main">${body}</main>
   </div>`;
 }
-function bindShell(){ const b=$("logoutBtn"); if(b) b.addEventListener("click",()=>{db.loggedIn=false;saveDb();render();}); }
+function bindShell(){
+  const b=$("logoutBtn"); if(b) b.addEventListener("click",()=>{db.loggedIn=false;saveDb();render();});
+  const t=$("sbToggle");
+  if(t) t.addEventListener("click",()=>{
+    const app=document.querySelector(".app");
+    const col=app.classList.toggle("sb-col");
+    setSbCollapsed(col);
+    t.title=col?"Expandir menu":"Recolher menu";
+    t.innerHTML=col?NAV_ICONS.expand:NAV_ICONS.collapse;
+  });
+}
 
 /* ---------- AUTH ---------- */
 let authMode="login";
@@ -740,6 +853,15 @@ function viewConta(){
     <div class="row-actions"><button class="btn sm" id="ac_keysave">Salvar chave</button><button class="btn sm ghost" id="ac_keyclear">Remover chave</button></div>
   </div>
   <div class="card pad" style="max-width:560px">
+    <h2 style="font-size:14px;margin:0 0 6px">Plano de contas</h2>
+    <p class="keyline" style="margin:0 0 12px">Categorias usadas no Budget Builder das propostas.</p>
+    <div id="coaList"></div>
+    <div class="row-actions" style="margin-top:10px">
+      <input id="coa_nova" placeholder="Nova categoria…" style="max-width:240px">
+      <button class="btn sm" id="coa_add">Adicionar</button>
+    </div>
+  </div>
+  <div class="card pad" style="max-width:560px">
     <h2 style="font-size:14px;margin:0 0 6px">Dados</h2>
     <p class="keyline" style="margin:0 0 12px">Tudo é salvo localmente no seu navegador. Você pode zerar para os dados de exemplo.</p>
     <button class="btn sm ghost" id="ac_reset">Restaurar dados de exemplo</button>
@@ -750,6 +872,18 @@ function bindConta(){
   $("ac_keysave").addEventListener("click",()=>{const v=$("ac_key").value.trim();try{if(v)localStorage.setItem("verba_key",v);else localStorage.removeItem("verba_key");}catch(e){}flash($("ac_keysave"),"Salvo ✓");});
   $("ac_keyclear").addEventListener("click",()=>{try{localStorage.removeItem("verba_key");}catch(e){}$("ac_key").value="";flash($("ac_keyclear"),"Removida");});
   $("ac_reset").addEventListener("click",()=>{if(!confirm("Restaurar tudo para os dados de exemplo? Suas propostas e clientes atuais serão apagados."))return;const keep=db.account,login=db.loggedIn;db=freshDb();db.account=keep;db.loggedIn=login;saveDb();go("#/");render();});
+  renderCoa();
+  $("coa_add").addEventListener("click",()=>{const v=($("coa_nova").value||"").trim();if(!v)return;if(!db.chartOfAccounts)db.chartOfAccounts=[];db.chartOfAccounts.push({id:uid(),nome:v});saveDb();renderCoa();$("coa_nova").value="";});
+  $("coa_nova").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("coa_add").click();}});
+}
+function renderCoa(){
+  const host=$("coaList");if(!host)return;
+  const cats=db.chartOfAccounts||[];
+  if(!cats.length){host.innerHTML=`<div class="empty" style="padding:8px 0;text-align:left">Nenhuma categoria.</div>`;return;}
+  host.innerHTML=`<table class="tbl" style="font-size:13px"><thead><tr><th>Categoria</th><th></th></tr></thead><tbody>
+    ${cats.map(c=>`<tr><td>${esc(c.nome)}</td><td class="r"><button class="iconbtn danger coa-del" data-id="${c.id}" style="height:28px;min-width:28px">${ICTRASH}</button></td></tr>`).join("")}
+  </tbody></table>`;
+  host.querySelectorAll(".coa-del").forEach(b=>b.addEventListener("click",()=>{db.chartOfAccounts=db.chartOfAccounts.filter(c=>c.id!==b.dataset.id);saveDb();renderCoa();}));
 }
 function flash(btn,txt){const o=btn.textContent;btn.textContent=txt;btn.disabled=true;setTimeout(()=>{btn.textContent=o;btn.disabled=false;},1100);}
 
@@ -769,6 +903,7 @@ function viewEditor(){
         <div class="two"><div class="stack"><label class="fl" for="pr_nome">Nome</label><input id="pr_nome" value="${esc(P.name)}"></div>
         <div class="stack"><label class="fl" for="pr_cliente">Cliente</label><select id="pr_cliente" class="inline">${clientOpts}</select></div></div>
         <div class="stack"><label class="fl" for="pr_desc">Descrição</label><textarea id="pr_desc" placeholder="Resumo do que é a proposta.">${esc(P.descricao)}</textarea></div>
+        <div class="stack" style="max-width:220px"><label class="fl" for="pr_recv">Data de recebimento</label><input id="pr_recv" type="date" value="${P.dataRecebimento?new Date(P.dataRecebimento).toISOString().slice(0,10):''}"></div>
       </div></div>
 
       <div class="card"><div class="card-h"><h2>Equipe alocada</h2><select id="profPick" class="inline" style="width:auto;font-size:12px;padding:7px 24px 7px 10px" aria-label="Adicionar de perfil">${profOpts}</select></div><div class="card-b">
@@ -793,6 +928,14 @@ function viewEditor(){
         <div class="rows" id="thirds"></div>
         <button class="add" id="addThird"><b>+</b> Adicionar parceiro</button>
         <p class="hint">Parceiro direto entra em linha separada, com overhead e margem menores — a administração vira uma <b>taxa de administração</b> ao cliente.</p>
+      </div></div>
+
+      <div class="card"><div class="card-h"><h2>Budget Builder</h2><span class="sub">orçamento detalhado por linha</span></div><div class="card-b">
+        <div class="bb-row head"><span>Descrição</span><span>Categoria</span><span>Tipo</span><span>Custo unit.</span><span>Qtd</span><span>Marg.%</span><span></span></div>
+        <div class="bb-rows" id="budgetLines"></div>
+        <button class="add" id="addBudgetLine"><b>+</b> Adicionar linha</button>
+        <div class="bb-total" id="bbTotal"><span class="k">Subtotal</span><span class="v" id="bbSubV">—</span><span class="k" style="margin-left:14px">Preço final</span><span class="v" id="bbFinalV">—</span></div>
+        <div class="bb-lock-bar" id="bbLockBar"></div>
       </div></div>
 
       <div class="card"><div class="card-h"><h2>Modelo de cobrança</h2><span class="sub">base = hora-homem</span></div><div class="card-b">
@@ -849,6 +992,7 @@ function bindEditor(){
   $("pr_cliente").addEventListener("change",e=>{P.clientId=e.target.value||null;queueSave();});
   $("pr_status").addEventListener("change",e=>{P.status=e.target.value;queueSave();});
   $("pr_desc").addEventListener("input",e=>{P.descricao=e.target.value;queueSave();});
+  $("pr_recv").addEventListener("change",e=>{P.dataRecebimento=e.target.value?new Date(e.target.value).getTime():null;queueSave();});
 
   $("profPick").addEventListener("change",e=>{
     const pr=db.profiles.find(x=>x.id===e.target.value);
@@ -857,6 +1001,7 @@ function bindEditor(){
   });
   $("addTeam").addEventListener("click",()=>{P.team.push({id:uid(),funcao:"",tipo:"CLT",salario:0,beneficios:0,horas:0});renderTeam();recalc();});
   $("addThird").addEventListener("click",()=>{P.thirds.push({id:uid(),descricao:"",custo:0,overhead:15,margem:10});renderThirds();recalc();});
+  $("addBudgetLine").addEventListener("click",()=>{if(!P.budgetLines)P.budgetLines=[];P.budgetLines.push({id:uid(),descricao:"",categoria:"",tipo:"interno",custo:0,qtd:1,margem:0});renderBudgetLines();});
 
   const map={p_horas:"horas",p_overhead:"overhead",p_margem:"margem",p_imposto:"imposto",p_clt:"clt",p_pj:"pj"};
   for(const id in map){$(id).value=P.params[map[id]];$(id).addEventListener("input",e=>{P.params[map[id]]=num(e.target.value);renderTeam();recalc();});}
@@ -882,7 +1027,7 @@ function bindEditor(){
   $("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat();}});
   document.querySelectorAll("#chatQuick .chip").forEach(c=>c.addEventListener("click",()=>{const i=$("chatInput");i.value=(i.value?i.value+"\n":"")+c.dataset.q;i.focus();}));
 
-  renderTeam();renderThirds();syncModelExtra();recalc();
+  renderTeam();renderThirds();renderBudgetLines();syncModelExtra();recalc();
 }
 
 function renderTeam(){
@@ -1064,6 +1209,308 @@ async function sendChat(text){
   P.chat.push({role:"bot",content:res.reply||"Pronto."});
   if(send)send.disabled=false;
   renderChat();queueSave();
+}
+
+/* ---------- BUDGET BUILDER helpers ---------- */
+function renderBudgetLines(){
+  const P=AP(),host=$("budgetLines");if(!host)return;
+  if(!P.budgetLines)P.budgetLines=[];
+  const cats=(db.chartOfAccounts||[]).map(c=>c.nome);
+  const locked=P.budgetLocked;
+  host.innerHTML="";
+  P.budgetLines.forEach((line,i)=>{
+    const el=document.createElement("div");el.className="bb-row";
+    const catOpts=[""].concat(cats).map(c=>`<option value="${esc(c)}" ${line.categoria===c?"selected":""}>${esc(c)}</option>`).join("");
+    el.innerHTML=`
+      <div class="field full"><label>Descrição</label><input data-k="descricao" value="${esc(line.descricao)}" placeholder="Item" aria-label="Descrição" ${locked?"disabled":""}></div>
+      <div class="field"><label>Categoria</label><select data-k="categoria" class="inline" aria-label="Categoria" ${locked?"disabled":""}><option value="">—</option>${catOpts}</select></div>
+      <div class="field"><label>Tipo</label><select data-k="tipo" class="inline" aria-label="Tipo" ${locked?"disabled":""}><option value="interno" ${line.tipo==="interno"?"selected":""}>Interno</option><option value="externo" ${line.tipo==="externo"?"selected":""}>Externo</option></select></div>
+      <div class="field"><label>Custo unit.</label><div class="affix"><span class="pre">R$</span><input class="num" data-k="custo" type="number" min="0" step="100" value="${num(line.custo)}" aria-label="Custo unitário" ${locked?"disabled":""}></div></div>
+      <div class="field"><label>Qtd</label><input class="num" data-k="qtd" type="number" min="1" step="1" value="${Math.max(1,num(line.qtd||1))}" aria-label="Quantidade" ${locked?"disabled":""}></div>
+      <div class="field"><label>Marg.%</label><div class="affix suf"><input class="num" data-k="margem" type="number" min="0" step="1" value="${num(line.margem)}" aria-label="Margem %" ${locked?"disabled":""}><span class="suf-s">%</span></div></div>
+      ${locked?`<div></div>`:`<button class="x" data-del title="Remover" aria-label="Remover">×</button>`}`;
+    if(!locked){
+      el.querySelectorAll("[data-k]").forEach(inp=>{
+        inp.addEventListener("input",()=>{line[inp.dataset.k]=inp.value;recalcBudget();});
+        inp.addEventListener("change",()=>{line[inp.dataset.k]=inp.value;recalcBudget();});
+      });
+      el.querySelector("[data-del]").addEventListener("click",()=>{P.budgetLines.splice(i,1);renderBudgetLines();});
+    }
+    host.appendChild(el);
+  });
+  recalcBudget();
+  const lockEl=$("bbLockBar");
+  if(!lockEl)return;
+  if(locked){
+    lockEl.innerHTML=`<span style="font-weight:600;color:var(--ink)">⚐ Budget travado${P.budgetLockedAt?" em "+dateStr(P.budgetLockedAt):""}</span><button class="btn sm ghost" id="unlockBudget" style="margin-left:8px">Destravar</button>`;
+    const ub=$("unlockBudget");if(ub)ub.addEventListener("click",()=>{if(!confirm("Destravar budget? As linhas ficam preservadas."))return;P.budgetLocked=false;renderBudgetLines();queueSave();});
+  }else{
+    lockEl.innerHTML=`<button class="btn sm ghost" id="lockBudget">Travar budget aprovado</button>`;
+    const lb=$("lockBudget");if(lb)lb.addEventListener("click",()=>{if(!P.budgetLines||!P.budgetLines.length){alert("Adicione pelo menos uma linha antes de travar.");return;}P.budgetLocked=true;P.budgetLockedAt=nowSafe();renderBudgetLines();queueSave();});
+  }
+}
+function recalcBudget(){
+  const P=AP();if(!P)return;
+  const lines=P.budgetLines||[];
+  let sub=0,final=0;
+  lines.forEach(l=>{const c=num(l.custo)*Math.max(1,num(l.qtd||1));sub+=c;final+=c*(1+num(l.margem)/100);});
+  const sv=$("bbSubV"),fv=$("bbFinalV");
+  if(sv)sv.textContent=lines.length?brl(sub):"—";
+  if(fv)fv.textContent=lines.length?brl(final):"—";
+  queueSave();
+}
+
+/* ---------- FREELANCERS ---------- */
+function flCompliance(f){
+  const hasCpfCnpj=(f.cpfCnpj||"").trim().length>0,hasPix=(f.pix||"").trim().length>0;
+  if(hasCpfCnpj&&hasPix)return`<span class="compliance ok">Completo</span>`;
+  const miss=[];if(!hasCpfCnpj)miss.push(f.tipo==="PJ"?"CNPJ":"CPF");if(!hasPix)miss.push("Pix");
+  return`<span class="compliance warn">Falta: ${miss.join(", ")}</span>`;
+}
+function viewFreelancers(){
+  if(!db.freelancers)db.freelancers=[];
+  const fl=db.freelancers;
+  return`
+  <div class="page-h"><div><h1>Freelancers</h1><div class="sub">${fl.length} cadastrados</div></div>
+    <div class="row-actions"><button class="btn" id="newFl">+ Novo freelancer</button></div></div>
+  <div class="card">
+    ${fl.length?`<table class="tbl"><thead><tr><th>Nome</th><th>Tipo</th><th>CPF/CNPJ</th><th>Pix</th><th>Conformidade</th><th></th></tr></thead><tbody>
+      ${fl.map(f=>`<tr>
+        <td><div class="nm">${esc(f.nome)}</div>${f.obs?`<div class="mut">${esc(f.obs)}</div>`:""}</td>
+        <td class="mut">${f.tipo==="PF"?"Pessoa Física":"Pessoa Jurídica"}</td>
+        <td class="mut mono">${esc(f.cpfCnpj||"—")}</td>
+        <td class="mut mono">${esc(f.pix||"—")}</td>
+        <td>${flCompliance(f)}</td>
+        <td class="r"><button class="iconbtn edit" data-id="${f.id}" title="Editar" aria-label="Editar">${ICEDIT}</button> <button class="iconbtn danger del" data-id="${f.id}" title="Excluir" aria-label="Excluir">${ICTRASH}</button></td></tr>`).join("")}
+    </tbody></table>`:`<div class="empty">Nenhum freelancer cadastrado.</div>`}
+  </div>
+  ${flModal()}`;
+}
+function flModal(){
+  return`<div class="overlay" id="fl_overlay"><div class="modal" role="dialog" aria-modal="true" aria-label="Freelancer" tabindex="-1">
+    <div class="modal-h"><h3 id="fl_title">Novo freelancer</h3><button class="mini" id="fl_x">Fechar</button></div>
+    <div class="modal-b">
+      <input type="hidden" id="fl_id">
+      <div class="two"><div class="stack"><label class="fl">Nome / Razão Social</label><input id="fl_nome" placeholder="Nome completo"></div>
+      <div class="stack"><label class="fl">Tipo</label><select id="fl_tipo" class="inline"><option value="PF">Pessoa Física</option><option value="PJ">Pessoa Jurídica</option></select></div></div>
+      <div class="two"><div class="stack"><label class="fl" id="fl_docLabel">CPF</label><input id="fl_cpfcnpj" placeholder="000.000.000-00"></div>
+      <div class="stack"><label class="fl">Chave Pix</label><input id="fl_pix" placeholder="CPF, e-mail ou telefone"></div></div>
+      <div class="two"><div class="stack"><label class="fl">E-mail</label><input id="fl_email" type="email"></div>
+      <div class="stack"><label class="fl">Portfolio / Site</label><input id="fl_portfolio"></div></div>
+      <div class="stack"><label class="fl">Observações</label><textarea id="fl_obs" placeholder="Especialidade, histórico…"></textarea></div>
+    </div>
+    <div class="modal-foot"><button class="mini" id="fl_cancel">Cancelar</button><button class="mini solid" id="fl_save">Salvar</button></div>
+  </div></div>`;
+}
+function bindFreelancers(){
+  if(!db.freelancers)db.freelancers=[];
+  $("newFl").addEventListener("click",()=>openFl(null));
+  document.querySelectorAll("button.edit").forEach(b=>b.addEventListener("click",()=>openFl(b.dataset.id)));
+  document.querySelectorAll("button.del").forEach(b=>b.addEventListener("click",()=>{if(!confirm("Excluir freelancer?"))return;db.freelancers=db.freelancers.filter(f=>f.id!==b.dataset.id);saveDb();render();}));
+  $("fl_x").addEventListener("click",closeFl);$("fl_cancel").addEventListener("click",closeFl);
+  $("fl_overlay").addEventListener("click",e=>{if(e.target.id==="fl_overlay")closeFl();});
+  $("fl_save").addEventListener("click",saveFl);
+  $("fl_tipo").addEventListener("change",syncFlDocLabel);
+}
+function openFl(id){
+  const f=id?(db.freelancers||[]).find(x=>x.id===id):null;
+  $("fl_title").textContent=f?"Editar freelancer":"Novo freelancer";
+  $("fl_id").value=f?f.id:"";$("fl_nome").value=f?f.nome||"":"";$("fl_tipo").value=f?f.tipo||"PF":"PF";
+  $("fl_cpfcnpj").value=f?f.cpfCnpj||"":"";$("fl_pix").value=f?f.pix||"":"";
+  $("fl_email").value=f?f.email||"":"";$("fl_portfolio").value=f?f.portfolio||"":"";$("fl_obs").value=f?f.obs||"":"";
+  syncFlDocLabel();lastFocused=document.activeElement;
+  $("fl_overlay").classList.add("show");document.body.style.overflow="hidden";$("fl_overlay").querySelector(".modal").focus();
+}
+function closeFl(){$("fl_overlay").classList.remove("show");document.body.style.overflow="";}
+function syncFlDocLabel(){const lbl=$("fl_docLabel");if(lbl)lbl.textContent=$("fl_tipo").value==="PJ"?"CNPJ":"CPF";}
+function saveFl(){
+  const id=$("fl_id").value,nome=($("fl_nome").value||"").trim();
+  if(!nome){alert("Informe o nome.");return;}
+  const data={nome,tipo:$("fl_tipo").value,cpfCnpj:$("fl_cpfcnpj").value.trim(),pix:$("fl_pix").value.trim(),email:$("fl_email").value.trim(),portfolio:$("fl_portfolio").value.trim(),obs:$("fl_obs").value.trim()};
+  if(!db.freelancers)db.freelancers=[];
+  if(id){Object.assign(db.freelancers.find(f=>f.id===id)||{},data);}else{db.freelancers.push(Object.assign({id:uid()},data));}
+  saveDb();closeFl();render();
+}
+
+/* ---------- POs (Pagamentos) ---------- */
+function viewPos(){
+  if(!db.pos)db.pos=[];if(!db.freelancers)db.freelancers=[];
+  const pos=[...db.pos].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  const totalAberto=pos.filter(p=>p.status!=="paga").reduce((s,p)=>s+num(p.valor),0);
+  const totalPago=pos.filter(p=>p.status==="paga").reduce((s,p)=>s+num(p.valor),0);
+  return`
+  <div class="page-h"><div><h1>Pagamentos</h1><div class="sub">Ordens de pagamento a freelancers</div></div>
+    <div class="row-actions"><button class="btn" id="newPo">+ Nova ordem</button></div></div>
+  <div class="stats">
+    <div class="stat"><div class="v mono">${pos.length}</div><div class="k">Total</div></div>
+    <div class="stat"><div class="v">${brl(totalAberto)}</div><div class="k">Em aberto</div></div>
+    <div class="stat"><div class="v">${brl(totalPago)}</div><div class="k">Pago</div></div>
+    <div class="stat"><div class="v mono">${pos.filter(p=>p.foreApplied).length}</div><div class="k">Com FORE</div></div>
+  </div>
+  <div class="card">
+    ${pos.length?`<table class="tbl"><thead><tr><th>Título</th><th>Freelancer</th><th>Proposta</th><th>Venc.</th><th>Status</th><th class="r">Valor</th><th></th></tr></thead><tbody>
+      ${pos.map(po=>{
+        const fl=(db.freelancers||[]).find(f=>f.id===po.freelancerId)||null;
+        const prop=db.proposals.find(p=>p.id===po.proposalId)||null;
+        const next=PO_FLOW[po.status];
+        return`<tr>
+          <td><div class="nm">${esc(po.titulo)}</div>${po.foreApplied?`<span class="fore-tag applied">FORE ${fmt(po.foreDesconto||0,1)}%</span>`:""}</td>
+          <td class="mut">${esc(fl?fl.nome:"—")}</td>
+          <td class="mut">${esc(prop?prop.name:"—")}</td>
+          <td class="mut">${po.vencimento?dateStr(po.vencimento):"—"}</td>
+          <td><span class="po-status ${po.status}">${PO_STATUS[po.status]||po.status}</span></td>
+          <td class="r num">${brl(po.valor)}</td>
+          <td class="r" style="white-space:nowrap">
+            ${next?`<button class="btn sm ghost poAdv" data-id="${po.id}" style="font-size:11px;padding:6px 10px">→ ${PO_STATUS[next]}</button> `:""}
+            ${po.status==="pronta"&&!po.foreApplied?`<button class="btn sm fore-btn" data-id="${po.id}" style="background:#5a3e00;font-size:11px;padding:6px 10px">FORE</button> `:""}
+            <button class="iconbtn danger del" data-id="${po.id}" title="Excluir" aria-label="Excluir">${ICTRASH}</button>
+          </td></tr>`;
+      }).join("")}
+    </tbody></table>`:`<div class="empty">Nenhuma ordem ainda. Crie a primeira.</div>`}
+  </div>
+  ${poModal()}`;
+}
+function poModal(){
+  const flOpts=(db.freelancers||[]).map(f=>`<option value="${f.id}">${esc(f.nome)}</option>`).join("");
+  const propOpts=db.proposals.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join("");
+  return`<div class="overlay" id="po_overlay"><div class="modal" role="dialog" aria-modal="true" aria-label="Ordem de pagamento" tabindex="-1">
+    <div class="modal-h"><h3 id="po_title">Nova ordem</h3><button class="mini" id="po_x">Fechar</button></div>
+    <div class="modal-b">
+      <input type="hidden" id="po_id">
+      <div class="stack"><label class="fl">Título</label><input id="po_titulo" placeholder="Ex: Ilustrações — Rebrand Acme"></div>
+      <div class="two"><div class="stack"><label class="fl">Freelancer</label><select id="po_fl" class="inline"><option value="">— selecionar —</option>${flOpts}</select></div>
+      <div class="stack"><label class="fl">Proposta</label><select id="po_prop" class="inline"><option value="">— sem proposta —</option>${propOpts}</select></div></div>
+      <div class="two"><div class="stack"><label class="fl">Valor (R$)</label><div class="affix"><span class="pre">R$</span><input class="num" id="po_valor" type="number" min="0" step="100" placeholder="0"></div></div>
+      <div class="stack"><label class="fl">Vencimento</label><input id="po_venc" type="date"></div></div>
+      <div class="stack"><label class="fl">Descrição do serviço</label><textarea id="po_desc" placeholder="Descreva o que está sendo pago…"></textarea></div>
+    </div>
+    <div class="modal-foot"><button class="mini" id="po_cancel">Cancelar</button><button class="mini solid" id="po_save">Salvar</button></div>
+  </div></div>`;
+}
+function bindPos(){
+  if(!db.pos)db.pos=[];
+  $("newPo").addEventListener("click",()=>openPo(null));
+  document.querySelectorAll("button.del").forEach(b=>b.addEventListener("click",()=>{if(!confirm("Excluir esta ordem?"))return;db.pos=db.pos.filter(p=>p.id!==b.dataset.id);saveDb();render();}));
+  document.querySelectorAll(".poAdv").forEach(b=>b.addEventListener("click",()=>{
+    const po=db.pos.find(p=>p.id===b.dataset.id);if(!po)return;
+    const next=PO_FLOW[po.status];if(!next)return;
+    po.status=next;saveDb();render();
+  }));
+  document.querySelectorAll(".fore-btn").forEach(b=>b.addEventListener("click",()=>{
+    const po=db.pos.find(p=>p.id===b.dataset.id);if(!po)return;
+    const pct=parseFloat(prompt("Taxa FORE — % de desconto cobrado pela agência (ex: 3.5):","3.5")||"0");
+    if(!isFinite(pct)||pct<0)return;
+    po.foreApplied=true;po.foreDesconto=pct;po.status="paga";
+    saveDb();render();
+  }));
+  $("po_x").addEventListener("click",closePo);$("po_cancel").addEventListener("click",closePo);
+  $("po_overlay").addEventListener("click",e=>{if(e.target.id==="po_overlay")closePo();});
+  $("po_save").addEventListener("click",savePo);
+}
+function openPo(id){
+  const po=id?(db.pos||[]).find(x=>x.id===id):null;
+  $("po_title").textContent=po?"Editar ordem":"Nova ordem";
+  $("po_id").value=po?po.id:"";$("po_titulo").value=po?po.titulo||"":"";
+  $("po_fl").value=po?po.freelancerId||"":"";$("po_prop").value=po?po.proposalId||"":"";
+  $("po_valor").value=po?po.valor||"":"";
+  $("po_venc").value=po&&po.vencimento?new Date(po.vencimento).toISOString().slice(0,10):"";
+  $("po_desc").value=po?po.descricao||"":"";
+  lastFocused=document.activeElement;
+  $("po_overlay").classList.add("show");document.body.style.overflow="hidden";$("po_overlay").querySelector(".modal").focus();
+}
+function closePo(){$("po_overlay").classList.remove("show");document.body.style.overflow="";}
+function savePo(){
+  const id=$("po_id").value,titulo=($("po_titulo").value||"").trim();
+  if(!titulo){alert("Informe o título.");return;}
+  const vencStr=$("po_venc").value;
+  const base={titulo,freelancerId:$("po_fl").value||null,proposalId:$("po_prop").value||null,valor:num($("po_valor").value),vencimento:vencStr?new Date(vencStr).getTime():null,descricao:$("po_desc").value.trim()};
+  if(!db.pos)db.pos=[];
+  if(id){const po=db.pos.find(p=>p.id===id);if(po)Object.assign(po,base);}
+  else{db.pos.push(Object.assign({id:uid(),status:"rascunho",foreApplied:false,foreDesconto:0,createdAt:nowSafe()},base));}
+  saveDb();closePo();render();
+}
+
+/* ---------- FINANCEIRO ---------- */
+function viewFinanceiro(){
+  if(!db.expenses)db.expenses=[];if(!db.pos)db.pos=[];
+  const aprovadas=db.proposals.filter(p=>p.status==="aprovada");
+  const receita=aprovadas.reduce((s,p)=>s+propDealValue(p),0);
+  const poTotal=db.pos.filter(p=>p.status!=="rascunho").reduce((s,p)=>s+num(p.valor),0);
+  const expTotal=db.expenses.reduce((s,e)=>s+num(e.valor),0);
+  const ml=receita-poTotal-expTotal;
+  const pctML=receita>0?ml/receita*100:0;
+  const now=nowSafe(),d30=now+30*86400000,d60=now+60*86400000,d90=now+90*86400000;
+  const cfRecv=(a,b)=>aprovadas.filter(p=>p.dataRecebimento&&p.dataRecebimento>a&&p.dataRecebimento<=b).reduce((s,p)=>s+propDealValue(p),0);
+  const cfPay=(a,b)=>db.pos.filter(p=>["aceita","pronta"].includes(p.status)&&p.vencimento&&p.vencimento>a&&p.vencimento<=b).reduce((s,p)=>s+num(p.valor),0);
+  const cfRows=[
+    {period:"Próx. 30 dias",recv:cfRecv(now-1,d30),pay:cfPay(now-1,d30)},
+    {period:"31 – 60 dias",recv:cfRecv(d30,d60),pay:cfPay(d30,d60)},
+    {period:"61 – 90 dias",recv:cfRecv(d60,d90),pay:cfPay(d60,d90)},
+  ].map(r=>({...r,net:r.recv-r.pay}));
+  const recentExp=[...db.expenses].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,20);
+  return`
+  <div class="page-h"><div><h1>Financeiro</h1><div class="sub">P&L, fluxo de caixa e despesas</div></div>
+    <div class="row-actions"><button class="btn" id="newExp">+ Lançar despesa</button></div></div>
+  <div class="pl-grid">
+    <div class="pl-stat"><div class="v">${brl(receita)}</div><div class="k">Receita (propostas aprovadas)</div></div>
+    <div class="pl-stat"><div class="v">${brl(poTotal)}</div><div class="k">POs comprometidas</div></div>
+    <div class="pl-stat"><div class="v">${brl(expTotal)}</div><div class="k">Despesas diretas</div></div>
+    <div class="pl-stat"><div class="v ${ml>=0?"pos":"neg"}">${brl(ml)}</div><div class="k">Margem líquida (${fmt(pctML,1)}%)</div></div>
+  </div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-h"><h2>Fluxo de caixa projetado</h2><span class="sub">entradas vs. saídas a vencer</span></div>
+    <table class="tbl"><thead><tr><th>Período</th><th class="r">Entrada esperada</th><th class="r">Saída esperada</th><th class="r">Saldo</th></tr></thead><tbody>
+      ${cfRows.map(r=>`<tr><td class="nm">${r.period}</td>
+        <td class="r num" style="color:#1a7a30">${brl(r.recv)}</td>
+        <td class="r num" style="color:#a11">${brl(r.pay)}</td>
+        <td class="r num"><b style="color:${r.net>=0?"#1a7a30":"#a11"}">${brl(r.net)}</b></td></tr>`).join("")}
+    </tbody></table>
+    <p class="hint" style="padding:8px 14px">Entradas: propostas aprovadas com <b>data de recebimento</b> definida no editor. Saídas: POs aceitas/prontas com vencimento definido.</p>
+  </div>
+  <div class="card">
+    <div class="card-h"><h2>Despesas & reembolsos</h2><span class="sub">${db.expenses.length} lançamentos · ${brl(expTotal)} total</span></div>
+    ${recentExp.length?`<table class="tbl"><thead><tr><th>Descrição</th><th>Proposta</th><th>Data</th><th class="r">Valor</th><th></th></tr></thead><tbody>
+      ${recentExp.map(e=>{const prop=db.proposals.find(p=>p.id===e.proposalId)||null;return`<tr>
+        <td class="nm">${esc(e.descricao)}</td>
+        <td class="mut">${esc(prop?prop.name:"—")}</td>
+        <td class="mut">${dateStr(e.createdAt)}</td>
+        <td class="r num">${brl(e.valor)}</td>
+        <td class="r"><button class="iconbtn danger del" data-id="${e.id}" title="Excluir" aria-label="Excluir">${ICTRASH}</button></td></tr>`;}).join("")}
+    </tbody></table>`:`<div class="empty">Nenhuma despesa lançada.</div>`}
+  </div>
+  ${expModal()}`;
+}
+function expModal(){
+  const propOpts=db.proposals.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join("");
+  return`<div class="overlay" id="exp_overlay"><div class="modal" role="dialog" aria-modal="true" aria-label="Despesa" tabindex="-1">
+    <div class="modal-h"><h3>Lançar despesa</h3><button class="mini" id="exp_x">Fechar</button></div>
+    <div class="modal-b">
+      <div class="stack"><label class="fl">Descrição</label><input id="exp_desc" placeholder="Ex: Impressão, Reembolso transporte…"></div>
+      <div class="two"><div class="stack"><label class="fl">Valor (R$)</label><div class="affix"><span class="pre">R$</span><input class="num" id="exp_valor" type="number" min="0" step="10" placeholder="0"></div></div>
+      <div class="stack"><label class="fl">Proposta vinculada</label><select id="exp_prop" class="inline"><option value="">— sem proposta —</option>${propOpts}</select></div></div>
+    </div>
+    <div class="modal-foot"><button class="mini" id="exp_cancel">Cancelar</button><button class="mini solid" id="exp_save">Lançar</button></div>
+  </div></div>`;
+}
+function bindFinanceiro(){
+  if(!db.expenses)db.expenses=[];
+  $("newExp").addEventListener("click",openExp);
+  document.querySelectorAll("button.del").forEach(b=>b.addEventListener("click",()=>{if(!confirm("Excluir este lançamento?"))return;db.expenses=db.expenses.filter(e=>e.id!==b.dataset.id);saveDb();render();}));
+  $("exp_x").addEventListener("click",closeExp);$("exp_cancel").addEventListener("click",closeExp);
+  $("exp_overlay").addEventListener("click",e=>{if(e.target.id==="exp_overlay")closeExp();});
+  $("exp_save").addEventListener("click",saveExp);
+}
+function openExp(){
+  $("exp_desc").value="";$("exp_valor").value="";$("exp_prop").value="";
+  lastFocused=document.activeElement;
+  $("exp_overlay").classList.add("show");document.body.style.overflow="hidden";$("exp_overlay").querySelector(".modal").focus();
+}
+function closeExp(){$("exp_overlay").classList.remove("show");document.body.style.overflow="";}
+function saveExp(){
+  const desc=($("exp_desc").value||"").trim();if(!desc){alert("Informe a descrição.");return;}
+  if(!db.expenses)db.expenses=[];
+  db.expenses.push({id:uid(),descricao:desc,valor:num($("exp_valor").value),proposalId:$("exp_prop").value||null,createdAt:nowSafe()});
+  saveDb();closeExp();render();
 }
 
 /* ---------- boot ---------- */
