@@ -21,7 +21,7 @@
     --ok:oklch(50% 0.16 145);--ok-bg:oklch(95% 0.05 145);
     --warn:oklch(53% 0.14 70);--warn-bg:oklch(97% 0.05 70);
     --err:oklch(52% 0.22 22);--err-bg:oklch(95.5% 0.04 22);
-    --info:oklch(48% 0.07 235);--info-bg:oklch(95.5% 0.025 235);
+    --info:oklch(48% 0.11 235);--info-bg:oklch(95.5% 0.03 235);
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -49,7 +49,7 @@
   .app.sb-col .brandrow .ver{opacity:0;max-width:0}
   @media(max-width:860px){.brandrow .ver{display:none}}
   .nav{display:flex;flex-direction:column;gap:2px;flex:1}
-  @media(max-width:860px){.nav{flex-direction:row;gap:2px;flex:0}}
+  @media(max-width:860px){.nav{flex-direction:row;gap:2px;flex:0}.nav a{min-height:44px}}
   .nav a{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--sb-ink);white-space:nowrap;transition:.13s;position:relative}
   .nav a .nav-ic{flex:0 0 18px;width:18px;height:18px;display:flex;align-items:center;justify-content:center}
   .nav a .nav-ic svg{width:18px;height:18px}
@@ -78,19 +78,21 @@
   @media(max-width:860px){.main{padding:22px 18px 80px}}
 
   /* ---------- page bits ---------- */
-  .page-h{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px;padding-bottom:15px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .page-h{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:26px;padding-bottom:17px;border-bottom:1px solid var(--line);flex-wrap:wrap}
   .page-h h1{font-size:31px;font-weight:700;letter-spacing:-.03em;line-height:1.04;margin:0}
   .page-h .sub{font-size:13px;font-weight:400;color:var(--muted);margin-top:4px}
   .row-actions{display:flex;gap:8px;flex-wrap:wrap}
 
   .btn{cursor:pointer;border:none;border-radius:9px;padding:11px 16px;font-size:13px;font-weight:700;background:var(--accent);color:var(--accent-ink);transition:.14s;display:inline-flex;align-items:center;justify-content:center;gap:7px}
   .btn:hover{transform:translateY(-1px);box-shadow:0 7px 20px -8px rgba(245,66,27,.55)}
+  .btn:active{transform:translateY(0);box-shadow:0 2px 6px -3px rgba(245,66,27,.5)}
   .btn.block{width:100%;padding:13px}
   .btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
   .btn.ghost:hover{border-color:var(--ink);background:var(--surface-2);transform:none}
   .btn.sm{padding:8px 12px;font-size:12.5px}
 
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+  @media(max-width:680px){.card:has(.tbl){overflow-x:auto}}
   .card.pad{padding:18px}
   .card + .card{margin-top:16px}
   .card-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line-2)}
@@ -104,7 +106,7 @@
   input.num,select{font-family:var(--mono);font-variant-numeric:tabular-nums}
   input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px oklch(63% 0.21 35 / 0.22)}
   textarea{resize:vertical;min-height:64px;line-height:1.5}
-  select.inline{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B6B6B' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:26px}
+  select.inline{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23686d73' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:26px}
   select.select-sm{width:auto;font-size:12px;padding:7px 24px 7px 10px}
   .stack{margin-bottom:13px}
   .stack:last-child{margin-bottom:0}
@@ -156,14 +158,14 @@
   .app.sb-col .sb-btns{justify-content:center}
   .app.sb-col .sb-btns .logout{opacity:0;max-width:0;padding:0;border:none;overflow:hidden;min-width:0}
   /* nav counter badge */
-  .nav-badge{background:var(--err);color:#fff;font-size:8px;font-weight:700;font-family:var(--mono);min-width:16px;height:16px;padding:0 4px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;margin-left:auto;letter-spacing:0;line-height:1;flex-shrink:0}
+  .nav-badge{background:var(--accent);color:var(--accent-ink);font-size:8px;font-weight:700;font-family:var(--mono);min-width:16px;height:16px;padding:0 4px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;margin-left:auto;letter-spacing:0;line-height:1;flex-shrink:0}
   .app.sb-col .nav-badge{position:absolute;top:5px;right:5px;min-width:14px;height:14px;font-size:7px;padding:0 3px;margin:0}
   @media(max-width:860px){
     .app.sb-col .sb-btns .logout{opacity:1;max-width:none;padding:7px 11px;border:1px solid var(--sb-line)}
     .app.sb-col .nav-badge{position:static;min-width:16px;height:16px;font-size:8px;padding:0 4px;margin:0 0 0 auto}
   }
   /* breadcrumb */
-  .breadcrumb{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted);margin-bottom:5px}
+  .breadcrumb{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted);margin-bottom:9px}
   .breadcrumb a:hover{color:var(--ink)}
   .breadcrumb .sep{opacity:.4}
 
@@ -226,13 +228,13 @@
   .analytics{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
   @media(max-width:760px){.analytics{grid-template-columns:1fr}}
   .chart-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px;margin-bottom:16px}
-  .chart-card h3{font-size:13px;font-weight:700;margin:0 0 16px}
+  .chart-card h3{font-size:14px;font-weight:700;margin:0 0 16px}
   .donut-wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
   .donut{width:118px;height:118px;border-radius:50%;flex:0 0 auto;position:relative}
   .donut::after{content:"";position:absolute;inset:25px;background:var(--surface);border-radius:50%}
   .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1}
   .donut-center .n{font-weight:700;font-size:26px;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
-  .donut-center .l{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+  .donut-center .l{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:3px}
   .legend{display:flex;flex-direction:column;gap:9px;flex:1;min-width:130px}
   .legend .lg{display:flex;align-items:center;gap:8px;font-size:12.5px}
   .legend .dot{width:10px;height:10px;border-radius:3px;flex:0 0 auto}
@@ -253,7 +255,7 @@
   .iconbtn.danger:hover{border-color:var(--err);color:var(--err)}
 
   /* ---------- editor (calculator) ---------- */
-  .grid{display:grid;grid-template-columns:1fr 372px;gap:22px;align-items:start}
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:22px;align-items:start}
   @media(max-width:960px){.grid{grid-template-columns:1fr}}
   .inputs .card{margin-bottom:18px}
   .rows{display:flex;flex-direction:column;gap:9px}
@@ -271,7 +273,7 @@
   .affix.suf input{padding-right:26px}
   .affix .suf-s{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:12px;color:var(--muted);pointer-events:none}
   .x{border:1px solid var(--line);background:var(--field);color:var(--muted);border-radius:8px;height:40px;cursor:pointer;font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;transition:.14s}
-  .x:hover{border-color:var(--ink);color:var(--ink)}
+  .x:hover{border-color:var(--err);color:var(--err)}
   .cost{font-family:var(--mono);font-size:11px;color:var(--muted);grid-column:1 / -1;text-align:right;padding-top:3px;border-top:1px dashed var(--line);margin-top:1px}
   .cost b{color:var(--ink)}
   .add{margin-top:11px;display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-family:var(--mono);font-size:12px;background:none;border:1px dashed var(--line);color:var(--ink-2);border-radius:8px;padding:9px 14px;transition:.14s}
@@ -289,15 +291,15 @@
   .seg button.on{background:var(--accent);color:var(--accent-ink)}
   .seg button:focus-visible{outline:2px solid var(--ink);outline-offset:-2px;position:relative;z-index:1}
   .seg .meta{display:block;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px}
-  .seg button.on .meta{color:rgba(0,0,0,.55)}
+  .seg button.on .meta{color:var(--accent-ink);opacity:.7}
   .model-extra{margin-top:13px;display:none}
   .model-extra.show{display:block}
 
   .panel{position:sticky;top:18px}
   .result-h{padding:15px 18px;border-bottom:1px solid var(--line-2);display:flex;align-items:baseline;justify-content:space-between}
   .result-h h2{font-size:14px;font-weight:700;margin:0}
-  .result-h .modeltag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-  .waterfall{padding:5px 18px 3px}
+  .result-h .modeltag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .waterfall{padding:8px 18px 6px}
   .wf{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px dashed var(--line)}
   .waterfall .wf:last-child{border-bottom:none}
   .wf .l{display:flex;flex-direction:column;gap:1px}
@@ -311,7 +313,7 @@
   .total::before{content:"";position:absolute;left:18px;top:0;height:3px;width:48px;background:var(--accent)}
   .total .meta{font-family:var(--mono);font-size:9px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--on-dark-dim)}
   .total .k{font-size:12px;font-weight:400;margin-top:2px;color:var(--on-dark)}
-  .total .v{font-weight:700;font-size:clamp(38px,5vw,54px);letter-spacing:-.04em;color:#fff;line-height:.92;white-space:nowrap;margin-top:6px;font-variant-numeric:tabular-nums}
+  .total .v{font-weight:700;font-size:clamp(38px,5vw,48px);letter-spacing:-.04em;color:#fff;line-height:.92;white-space:nowrap;margin-top:6px;font-variant-numeric:tabular-nums}
   .total .small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--on-dark-dim);margin-top:9px}
   .total .small:empty{display:none}
   .metrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-2)}
@@ -331,10 +333,10 @@
   .modal-b .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
   .modal-foot{display:flex;gap:8px;justify-content:flex-end;padding:14px 20px;border-top:1px solid var(--line-2);background:var(--surface-2)}
   .mini{font-size:13px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:9px 15px;cursor:pointer;transition:.14s}
-  .mini:hover{border-color:var(--ink)}
+  .mini:hover{border-color:var(--ink);background:var(--surface-2)}
+  .mini:active{background:var(--line-2)}
   .mini.solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
   .mini.solid:hover{box-shadow:0 6px 16px -7px rgba(245,66,27,.5)}
-  .mini.danger:hover{border-color:var(--err);color:var(--err)}
   .asst-status{font-size:12px;color:var(--muted);margin-top:12px;min-height:16px;line-height:1.5}
   .asst-status.err{color:var(--err)}
   .keyline{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.5}
@@ -352,6 +354,7 @@
   .chat-quick{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 8px}
   .chip{font-size:12px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 11px;cursor:pointer;color:var(--ink-2);transition:.13s}
   .chip:hover{border-color:var(--ink);color:var(--ink)}
+  .chip:active{background:var(--surface-2)}
   .chat-in{border-top:1px solid var(--line-2);padding:12px 14px;display:flex;gap:8px;align-items:flex-end}
   .chat-in textarea{min-height:42px;max-height:150px;border-radius:10px}
   .chat-in .btn{flex:0 0 auto;align-self:stretch}
@@ -419,12 +422,12 @@
   .po-status.pronta{border-color:var(--warn);color:var(--warn);background:var(--warn-bg)}
   .po-status.paga{background:var(--ink);color:#fff;border-color:var(--ink)}
   .fore-tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);margin:4px 0 0}
-  .btn.fore{background:oklch(38% 0.09 70)}
-  .btn.fore:hover{background:oklch(32% 0.09 70)}
+  .btn.fore{background:var(--warn);color:#fff}
+  .btn.fore:hover{background:oklch(46% 0.14 70);box-shadow:0 7px 20px -8px oklch(46% 0.14 70 / .55)}
   .fore-tag.applied{background:var(--ink);color:#fff;border-color:var(--ink)}
   .pl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
   .pl-stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px}
-  .pl-stat .v{font-weight:700;font-size:32px;letter-spacing:-.03em;font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .pl-stat .v{font-weight:700;font-size:32px;letter-spacing:-.03em;line-height:1;font-family:var(--mono);font-variant-numeric:tabular-nums}
   .pl-stat .v.pos{color:var(--ok)}.pl-stat .v.neg{color:var(--err)}
   .pl-stat .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 
@@ -463,7 +466,7 @@ const MODELS={projeto:{tag:"Projeto",label:"Valor final ao cliente",k:"Investime
 const STATUS={rascunho:"Rascunho",enviada:"Enviada",aprovada:"Aprovada",perdida:"Perdida"};
 const COND_DEFAULTS={projeto:"50% na aprovação · 50% na entrega final",fee:"Cobrança mensal recorrente",token:"Pagamento antecipado do pacote de horas",tabela:"Faturamento mensal por horas apontadas"};
 function isDefaultCond(c){c=(c||"").trim();return !c || Object.keys(COND_DEFAULTS).some(k=>COND_DEFAULTS[k]===c);}
-const STATUS_SHADE={rascunho:"oklch(64% 0 0)",enviada:"oklch(51% 0.135 230)",aprovada:"oklch(50% 0.16 145)",perdida:"oklch(52% 0.22 22)"};
+const STATUS_SHADE={rascunho:"var(--ink-2)",enviada:"var(--info)",aprovada:"var(--ok)",perdida:"var(--err)"};
 let propFilters={q:"",status:"",client:""};
 const ICTRASH='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>';
 const ICEDIT='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';
@@ -612,7 +615,7 @@ window.addEventListener("hashchange",render);
 /* ---------- shell ---------- */
 /* ---------- avatar helpers ---------- */
 function initials(name){const p=(name||"").trim().split(/\s+/);return p.length===1?(p[0][0]||"?").toUpperCase():((p[0][0]||"")+(p[p.length-1][0]||"")).toUpperCase();}
-function avatarBg(name){const pal=["oklch(50% 0.17 22)","oklch(52% 0.16 55)","oklch(50% 0.16 145)","oklch(50% 0.15 175)","oklch(52% 0.15 230)","oklch(52% 0.16 265)","oklch(50% 0.17 290)","oklch(50% 0.17 330)"];let h=0;for(let i=0;i<(name||"").length;i++)h=((name.charCodeAt(i)+h*31)>>>0);return pal[h%pal.length];}
+function avatarBg(name){const pal=["oklch(48% 0.16 32)","oklch(48% 0.13 90)","oklch(48% 0.14 150)","oklch(48% 0.10 195)","oklch(48% 0.13 240)","oklch(48% 0.15 280)","oklch(48% 0.16 320)","oklch(48% 0.16 358)"];let h=0;for(let i=0;i<(name||"").length;i++)h=((name.charCodeAt(i)+h*31)>>>0);return pal[h%pal.length];}
 function av(name,cls="",photo=false){
   const n=name||"?";
   const img=photo?`<img src="https://i.pravatar.cc/144?u=${encodeURIComponent(n)}" alt="" onerror="this.remove()">`:"";
@@ -876,7 +879,7 @@ function createProposal(){
 function viewClientes(){
   return `
   <div class="breadcrumb"><a href="#/">Início</a><span class="sep">›</span>Clientes</div>
-  <div class="page-h"><div><h1>Clientes</h1><div class="sub">${db.clients.length} cadastrados</div></div>
+  <div class="page-h"><div><h1>Clientes</h1><div class="sub">${db.clients.length} ${db.clients.length===1?"cadastrado":"cadastrados"}</div></div>
     <div class="row-actions"><button class="btn" id="newClient">+ Novo cliente</button></div></div>
   <div class="card">
     ${db.clients.length?`<table class="tbl"><thead><tr><th>Cliente</th><th>Contato</th><th class="r">Propostas</th><th></th></tr></thead><tbody>
@@ -1015,7 +1018,7 @@ function viewConta(){
   </div>
   <div class="card pad" style="max-width:560px">
     <h2 style="font-size:14px;margin:0 0 6px">Dados</h2>
-    <p class="keyline" style="margin:0 0 12px">Tudo é salvo localmente no seu navegador. Você pode zerar para os dados de exemplo.</p>
+    <p class="keyline" style="margin:0 0 12px">Tudo é salvo localmente no seu navegador. Você pode restaurar os dados de exemplo a qualquer momento.</p>
     <button class="btn sm ghost" id="ac_reset">Restaurar dados de exemplo</button>
   </div>`;
 }
@@ -1046,7 +1049,7 @@ function viewEditor(){
   const statusOpts=Object.keys(STATUS).map(k=>`<option value="${k}" ${P.status===k?"selected":""}>${STATUS[k]}</option>`).join("");
   const profOpts=`<option value="">+ de perfil…</option>`+db.profiles.map(p=>`<option value="${p.id}">${esc(p.funcao)}</option>`).join("");
   return `
-  <div class="ed-head page-h"><div style="min-width:0"><a href="#/propostas" class="sub">← Propostas</a><h1 style="margin-top:2px">${esc(P.name)}</h1></div>
+  <div class="ed-head page-h"><div style="min-width:0"><a href="#/propostas" class="sub">← Propostas</a><h1 style="margin-top:5px">${esc(P.name)}</h1></div>
     <div class="row-actions"><select id="pr_status" class="inline select-sm" aria-label="Status da proposta" style="align-self:center">${statusOpts}</select><span class="sub mono" id="saveState" style="align-self:center">salvo</span><button class="btn ghost sm" id="assistantBtn">Assistente</button><button class="btn sm" id="openProposal">Gerar proposta →</button></div></div>
 
   <div class="editor grid">
@@ -1223,7 +1226,7 @@ function syncModelExtra(){const P=AP();["projeto","fee","token"].forEach(x=>{con
 function recalc(){
   const P=AP(),R=compute();if(!R)return;
   const rows=[
-    {k:"Custo de pessoal",meta:`${P.team.length} profissionais`,v:brl(R.custoPessoal),cls:"",b:true},
+    {k:"Custo de pessoal",meta:`${P.team.length} ${P.team.length===1?"profissional":"profissionais"}`,v:brl(R.custoPessoal),cls:"",b:true},
     {k:"Overhead",meta:`${fmt(P.params.overhead)}% s/ pessoal`,v:brl(R.overheadVal),cls:"add"},
     {k:"Margem",meta:`${fmt(P.params.margem)}% s/ subtotal`,v:brl(R.margemVal),cls:"add"},
     {k:"Impostos",meta:`markup ${fmt(P.params.imposto)}%`,v:brl(R.impostoVal),cls:"add"},
@@ -1302,7 +1305,7 @@ function chatOffline(text){
   const brief=(text||"").replace(/\s+/g," ").trim();
   const updates={escopo:(TPL[tipo]||TPL.outro).join("\n")+"\n2 rodadas de ajustes"};
   if(!P.descricao||P.descricao.trim().length<8) updates.descricao=`${TLBL[tipo]||"Projeto"} para ${cliTxt}. ${brief}`.trim();
-  return {reply:`Organizei um escopo de ${TLBL[tipo]} e ${updates.descricao?"a descrição":"mantive sua descrição"}. Ajuste os campos ou me peça mudanças. (Modo offline por templates — coloque sua chave da Anthropic em Conta pra um assistente conversacional de verdade.)`,updates};
+  return {reply:`Organizei um escopo de ${TLBL[tipo]} e ${updates.descricao?"escrevi a descrição":"mantive sua descrição"}. Ajuste os campos ou me peça mudanças. (Modo offline por templates — adicione sua chave da Anthropic em Conta para um assistente conversacional de verdade.)`,updates};
 }
 async function chatOnline(key){
   const P=AP(),R=compute(),cli=db.clients.find(c=>c.id===P.clientId);
@@ -1424,7 +1427,7 @@ function viewFreelancers(){
   const fl=db.freelancers;
   return`
   <div class="breadcrumb"><a href="#/">Início</a><span class="sep">›</span>Freelancers</div>
-  <div class="page-h"><div><h1>Freelancers</h1><div class="sub">${fl.length} cadastrados</div></div>
+  <div class="page-h"><div><h1>Freelancers</h1><div class="sub">${fl.length} ${fl.length===1?"cadastrado":"cadastrados"}</div></div>
     <div class="row-actions"><button class="btn" id="newFl">+ Novo freelancer</button></div></div>
   <div class="card">
     ${fl.length?`<table class="tbl"><thead><tr><th>Nome</th><th>Tipo</th><th>CPF/CNPJ</th><th>Pix</th><th>Conformidade</th><th></th></tr></thead><tbody>
@@ -1499,7 +1502,7 @@ function viewPos(){
     <div class="stat"><div class="v mono">${pos.length}</div><div class="k">Total</div></div>
     <div class="stat"><div class="v">${brl(totalAberto)}</div><div class="k">Em aberto</div></div>
     <div class="stat"><div class="v">${brl(totalPago)}</div><div class="k">Pago</div></div>
-    <div class="stat"><div class="v mono">${pos.filter(p=>p.foreApplied).length}</div><div class="k">Com FORE</div></div>
+    <div class="stat"><div class="v mono">${pos.filter(p=>p.foreApplied).length}</div><div class="k">Com taxa FORE</div></div>
   </div>
   <div class="card">
     ${pos.length?`<table class="tbl"><thead><tr><th>Título</th><th>Freelancer</th><th>Proposta</th><th>Venc.</th><th>Status</th><th class="r">Valor</th><th></th></tr></thead><tbody>
@@ -1608,7 +1611,7 @@ function viewFinanceiro(){
     <div class="row-actions"><button class="btn" id="newExp">+ Lançar despesa</button></div></div>
   <div class="pl-grid">
     <div class="pl-stat"><div class="v">${brl(receita)}</div><div class="k">Receita (propostas aprovadas)</div></div>
-    <div class="pl-stat"><div class="v">${brl(poTotal)}</div><div class="k">POs comprometidas</div></div>
+    <div class="pl-stat"><div class="v">${brl(poTotal)}</div><div class="k">Pagamentos comprometidos</div></div>
     <div class="pl-stat"><div class="v">${brl(expTotal)}</div><div class="k">Despesas diretas</div></div>
     <div class="pl-stat"><div class="v ${ml>=0?"pos":"neg"}">${brl(ml)}</div><div class="k">Margem líquida (${fmt(pctML,1)}%)</div></div>
   </div>
@@ -1623,7 +1626,7 @@ function viewFinanceiro(){
     <p class="hint" style="padding:8px 14px">Entradas: propostas aprovadas com <b>data de recebimento</b> definida no editor. Saídas: POs aceitas/prontas com vencimento definido.</p>
   </div>
   <div class="card">
-    <div class="card-h"><h2>Despesas & reembolsos</h2><span class="sub">${db.expenses.length} lançamentos · ${brl(expTotal)} total</span></div>
+    <div class="card-h"><h2>Despesas & reembolsos</h2><span class="sub">${db.expenses.length} ${db.expenses.length===1?"lançamento":"lançamentos"} · ${brl(expTotal)}</span></div>
     ${recentExp.length?`<table class="tbl"><thead><tr><th>Descrição</th><th>Proposta</th><th>Data</th><th class="r">Valor</th><th></th></tr></thead><tbody>
       ${recentExp.map(e=>{const prop=db.proposals.find(p=>p.id===e.proposalId)||null;return`<tr>
         <td class="nm">${esc(e.descricao)}</td>
