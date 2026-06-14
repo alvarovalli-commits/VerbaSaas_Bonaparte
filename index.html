@@ -15,6 +15,7 @@
     --ink-deep:#1b2730;--on-dark:#e8eaec;--on-dark-dim:#8b949d;
     --shadow:0 1px 0 rgba(0,0,0,.03),0 20px 44px -28px rgba(0,0,0,.16);
     --sans:"Google Sans","Helvetica Neue",Arial,sans-serif;--mono:"Google Sans Mono","JetBrains Mono",ui-monospace,monospace;--r:12px;--r-lg:14px;
+    --space-3xs:4px;--space-2xs:8px;--space-xs:12px;--space-sm:16px;--space-md:20px;--space-lg:24px;--space-xl:32px;--space-2xl:48px;
     --accent:#f5421b;--accent-ink:#1a1a1a;--accent-deep:#b8330e;--accent-lite:#ff8763;
     --sb-bg:#1b2730;--sb-hover:#28343f;--sb-active:#31404c;
     --sb-ink:#99a3ac;--sb-ink-hi:#eceef0;--sb-line:#2c3842;
@@ -123,6 +124,7 @@
   .tbl th:last-child,.tbl td:last-child{padding-right:18px}
   .tbl tr.clk{cursor:pointer;transition:.1s}
   .tbl tr.clk:hover td{background:var(--surface-2)}
+  .tbl tr.clk:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
   .tbl td.clk{cursor:pointer}
   .tbl td.clk:hover{text-decoration:underline}
   .tbl .nm{font-weight:600;word-break:break-word}
@@ -180,16 +182,16 @@
     --hero-line:color-mix(in oklab,var(--on-dark) 15%,transparent);
     --hero-chip:color-mix(in oklab,var(--on-dark) 7%,transparent)}
   .hero::before{content:"";position:absolute;left:26px;top:0;height:3px;width:48px;background:var(--accent)}
-  .hero-body{padding:24px 26px 22px}
-  .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+  .hero-body{padding:var(--space-lg) 26px}
+  .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:var(--space-md)}
   .hero-hi{font-size:13.5px;font-weight:600;color:var(--on-dark);padding-top:5px;margin:0}
   .hero-date{display:block;font-family:var(--mono);font-size:9.5px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-dim);margin-top:3px}
   .hero-cta{background:#fff;color:var(--ink-deep)}
   .hero-cta:hover{background:var(--on-dark);transform:translateY(-1px)}
   .hero-cta:focus-visible{outline-color:#fff}
   .hero-meta{font-family:var(--mono);font-size:9px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--on-dark-dim)}
-  .hero-num{font-weight:700;font-size:clamp(44px,8vw,68px);letter-spacing:-.04em;line-height:.92;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums;margin-top:8px}
-  .hero-sub{font-size:13px;line-height:1.5;color:var(--on-dark);opacity:.75;margin-top:11px;max-width:560px}
+  .hero-num{font-weight:700;font-size:clamp(44px,8vw,68px);letter-spacing:-.04em;line-height:.92;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums;margin-top:var(--space-2xs)}
+  .hero-sub{font-size:13px;line-height:1.5;color:var(--on-dark);opacity:.75;margin-top:var(--space-xs);max-width:560px}
   .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--hero-line)}
   .hero-stat{padding:13px 16px 15px;border-right:1px solid var(--hero-line)}
   .hero-stat:first-child{padding-left:26px}
@@ -225,7 +227,7 @@
   .filters .fcount{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto}
 
   /* analytics */
-  .analytics{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  .analytics{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-sm)}
   @media(max-width:760px){.analytics{grid-template-columns:1fr}}
   .chart-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px;margin-bottom:16px}
   .chart-card h3{font-size:14px;font-weight:700;margin:0 0 16px}
@@ -249,6 +251,11 @@
   .insights li{font-size:13.5px;color:var(--ink-2);padding-left:16px;position:relative;line-height:1.45}
   .insights li::before{content:"›";position:absolute;left:0;color:var(--muted);font-weight:700}
   .insights b{color:var(--ink)}
+
+  /* dashboard vertical rhythm — gap-driven, not per-element margins */
+  .dash{display:flex;flex-direction:column;gap:var(--space-lg)}
+  .dash>*{margin:0}
+  .analytics .chart-card{margin:0}
 
   .iconbtn{border:1px solid var(--line);background:var(--field);color:var(--muted);border-radius:8px;height:34px;min-width:34px;padding:0 9px;cursor:pointer;font-size:13px;transition:.13s;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
   .iconbtn:hover{border-color:var(--ink);color:var(--ink)}
@@ -786,6 +793,7 @@ function viewDashboard(){
   if(!props.length)ins.push("Crie sua primeira proposta para ver as análises aqui.");
 
   return `
+  <div class="dash">
   <section class="hero" aria-label="Resumo do pipeline">
     <div class="hero-body">
       <div class="hero-top">
@@ -809,19 +817,26 @@ function viewDashboard(){
     </div>`:""}
   </section>
   ${props.length?`<div class="analytics">
-    <div class="chart-card" style="margin-bottom:0"><h3>Distribuição por status</h3><div class="donut-wrap"><div class="donut" style="background:${donutBg}"><div class="donut-center"><div class="n">${totalC}</div><div class="l">${totalC===1?"proposta":"propostas"}</div></div></div><div class="legend">${legend}</div></div></div>
-    <div class="chart-card" style="margin-bottom:0"><h3>Valor de contrato por status</h3><div class="bars">${bars}</div></div>
+    <div class="chart-card"><h3>Distribuição por status</h3><div class="donut-wrap"><div class="donut" style="background:${donutBg}"><div class="donut-center"><div class="n">${totalC}</div><div class="l">${totalC===1?"proposta":"propostas"}</div></div></div><div class="legend">${legend}</div></div></div>
+    <div class="chart-card"><h3>Valor de contrato por status</h3><div class="bars">${bars}</div></div>
   </div>
   <div class="chart-card"><h3>Insights</h3><ul class="insights">${ins.map(i=>`<li>${i}</li>`).join("")}</ul></div>`:""}
   <div class="card"><div class="card-h"><h2>Propostas recentes</h2><a class="sub" href="#/propostas">ver todas →</a></div>
     ${recent.length?`<table class="tbl"><thead><tr><th>Proposta</th><th>Cliente</th><th>Status</th><th class="r">Valor</th></tr></thead><tbody>
       ${recent.map(p=>{const cn=clientName(p.clientId);const cli=db.clients.find(c=>c.id===p.clientId);return `<tr class="clk" data-go="#/proposta/${p.id}"><td><div class="av-row">${av(p.name,"sm")}<span class="nm">${esc(p.name)}</span></div></td><td><div class="av-row">${cn!=="—"?av(cli&&cli.nome||cn,"sm",true):""}${cn!=="—"?`<span class="mut">${esc(cn)}</span>`:`<span class="mut">—</span>`}</div></td><td>${badge(p.status)}</td><td class="r num">${propPrice(p)}</td></tr>`;}).join("")}
     </tbody></table>`:`<div class="empty">Nenhuma proposta ainda.</div>`}
+  </div>
   </div>`;
 }
 function bindDashboard(){
   $("dashNew").addEventListener("click",createProposal);
-  document.querySelectorAll("[data-go]").forEach(r=>r.addEventListener("click",()=>go(r.dataset.go)));
+  document.querySelectorAll("[data-go]").forEach(r=>{
+    r.addEventListener("click",()=>go(r.dataset.go));
+    if(!r.matches("button,a")){
+      r.tabIndex=0; r.setAttribute("role","link");
+      r.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go(r.dataset.go);}});
+    }
+  });
 }
 function badge(s){return `<span class="badge ${s}">${STATUS[s]||s}</span>`;}
 
