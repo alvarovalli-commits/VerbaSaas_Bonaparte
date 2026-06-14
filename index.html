@@ -633,7 +633,7 @@ function navItem(href,_ic,label,h,n=0){
     "#/perfis":"perfis","#/financeiro":"financeiro","#/freelancers":"freelancers",
     "#/pos":"pagamentos","#/conta":"conta"
   }[href]||"dashboard";
-  return `<a href="${href}" class="${a?"active":""}" data-label="${esc(label)}"><span class="nav-ic">${NAV_ICONS[icKey]}</span><span class="nav-lbl">${label}${n?`<span class="nav-badge">${n>99?"99+":n}</span>`:""}</span></a>`;
+  return `<a href="${href}" class="${a?"active":""}" data-label="${esc(label)}"><span class="nav-ic">${NAV_ICONS[icKey]}</span><span class="nav-lbl">${label}</span>${n?`<span class="nav-badge">${n>99?"99+":n}</span>`:""}</a>`;
 }
 function getSbCollapsed(){try{return localStorage.getItem("verba_sb_col")==="1";}catch{return false;}}
 function setSbCollapsed(v){try{localStorage.setItem("verba_sb_col",v?"1":"0");}catch{}}
